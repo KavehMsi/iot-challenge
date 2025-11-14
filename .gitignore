@@ -1,0 +1,8 @@
+
+# Ignore dynaconf secret files
+
+
+**/__pycache__/
+.venv/*
+suricata/*
+.vscode/*
