@@ -1,5 +1,6 @@
 import argparse
 import os
+import shutil
 
 import docker
 import psutil
@@ -225,15 +226,14 @@ class SuricataManager:
             print("No DOCKER_VOLUME specified, skipping log clean up.")
             return
 
-        eve_log_path = os.path.join(log_volume, "eve.json")
-        if os.path.exists(eve_log_path):
+        if os.path.exists(log_volume):
             try:
-                os.remove(eve_log_path)
-                print(f"Removed log file: {eve_log_path}")
+                shutil.rmtree(log_volume)
+                print(f"Removed log file: {log_volume}")
             except Exception as e:
-                print(f"Failed to remove log file {eve_log_path}: {e}")
+                print(f"Failed to remove log file {log_volume}: {e}")
         else:
-            print(f"No log file found at: {eve_log_path}")
+            print(f"No log file found at: {log_volume}")
 
     def stop(self, clean_up: bool = False):
         self.__stop_suricata()
