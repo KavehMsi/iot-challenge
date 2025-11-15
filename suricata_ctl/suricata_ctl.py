@@ -66,7 +66,7 @@ ENV_SCHEMA = {
     "SURICATA_CLASSIFICATION": {"type": str, "required": False},
     "SURICATA_REFERENCE": {"type": str, "required": False},
     "SURICATA_THRESHOLD": {"type": str, "required": False},
-    "SURICATA_UPDATE": {"type": bool, "required": False},
+    "SURICATA_UPDATE": {"type": str, "required": False},
     "DOCKER_IMAGE": {"type": str, "required": False},
     "CONTAINER_NAME": {"type": str, "required": False},
     "DOCKER_VOLUME": {"type": str, "required": False},
@@ -81,7 +81,7 @@ VOLUMES = {
     },
     "SURICATA_REFERENCE": {"bind": "/etc/suricata/reference.config", "mode": "rw"},
     "SURICATA_THRESHOLD": {"bind": "/etc/suricata/threshold.config", "mode": "rw"},
-    "SURICATA_UPDATE": {"bind": "/var/lib/suricata/rules", "mode": "rw"},
+    "SURICATA_UPDATE": {"bind": "/etc/suricata/update.yaml", "mode": "rw"},
 }
 
 
@@ -229,9 +229,9 @@ class SuricataManager:
         if os.path.exists(log_volume):
             try:
                 shutil.rmtree(log_volume)
-                print(f"Removed log file: {log_volume}")
+                print(f"Removed log dir: {log_volume}")
             except Exception as e:
-                print(f"Failed to remove log file {log_volume}: {e}")
+                print(f"Failed to remove log dir {log_volume}: {e}")
         else:
             print(f"No log file found at: {log_volume}")
 
