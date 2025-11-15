@@ -255,7 +255,6 @@ class SuricataManager:
     def __set_log_rotate_config(
         self, rotate_size_mb: int, retention_days: int, log_path: str
     ):
-        # Build config content
         content = f"""
     {log_path}/*.log
     {log_path}/*.json {{
